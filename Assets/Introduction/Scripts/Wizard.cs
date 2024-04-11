@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wizard : MonoBehaviour
-{
+{    
+    public GameObject fireballPrefab;
+    float castTimer = 0f;
     float movementSpeed = 2.0f;
 
     // Start is called before the first frame update
@@ -15,6 +17,10 @@ public class Wizard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //
+        // Movement 
+        //
+
         Vector3 movement = Vector3.zero;
 
         if (Input.GetKey("w"))
@@ -31,8 +37,8 @@ public class Wizard : MonoBehaviour
         }
         if (Input.GetKey("d"))
         {
-            movement +=  Vector3.right;
-        }
+            movement += Vector3.right;
+        } 
                
         float sprintSpeedFactor = 1.0f;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -40,7 +46,18 @@ public class Wizard : MonoBehaviour
             sprintSpeedFactor = 2.0f;
         }
 
-        transform.position += movement.normalized * Time.deltaTime * movementSpeed * sprintSpeedFactor;        
+        transform.position += movement.normalized * Time.deltaTime * movementSpeed * sprintSpeedFactor;   
+
+        //
+        // Casting
+        //
+
+        castTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) && castTimer <= 0)
+        {
+            Instantiate(fireballPrefab, transform.position, Quaternion.identity);
+            castTimer = 3;
+        }     
         
     }
 }

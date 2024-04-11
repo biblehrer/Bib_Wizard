@@ -391,6 +391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59b5e0ba15957748bba07ed02bc2c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 2.5
+  fireballPrefab: {fileID: 3187535604922598014, guid: 44663cac0c2625441a6a6b5e79752410, type: 3}
 --- !u!4 &1621321558
 Transform:
   m_ObjectHideFlags: 0
