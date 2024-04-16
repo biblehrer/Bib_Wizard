@@ -10,20 +10,14 @@ public class Fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //float angle = Vector3.Angle(direction, Vector3.right);
+        float angle = Vector3.Angle(direction, Vector3.right);
 
-        if (direction.y > 0)
+        if (direction.y <0)
         {
-            transform.Rotate(new Vector3(0,0,90));
+            angle = angle * -1;
         }
-        if (direction.y < 0)
-        {
-            transform.Rotate(new Vector3(0,0,270));
-        }
-        if (direction.x < 0)
-        {
-            transform.Rotate(new Vector3(0,0,180));
-        }
+        
+        transform.Rotate(new Vector3(0,0,angle));
 
         Destroy(gameObject, 3);
     }
