@@ -20,11 +20,23 @@ public class Fireball : MonoBehaviour
         transform.Rotate(new Vector3(0,0,angle));
 
         Destroy(gameObject, 3);
+
+        transform.position = transform.position + direction * 1.6f;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = transform.position + direction *4 * Time.deltaTime;        
+    }
+
+    void OnCollisionEnter2D(Collision2D collision2D)
+    {
+        string tag = collision2D.gameObject.tag;
+        if (tag == "Player")
+        {
+            return;
+        }    
+        Destroy(gameObject);
     }
 }

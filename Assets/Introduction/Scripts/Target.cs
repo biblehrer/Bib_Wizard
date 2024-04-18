@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public GameObject targetPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +18,16 @@ public class Target : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision2D)
     {
-        Destroy(gameObject);
+        string tag = collision2D.gameObject.tag;
+        if (tag == "Fireball")
+        {
+            float x = Random.Range(-9, 9);
+            float y = Random.value * 10 -5 ;
+            Instantiate(targetPrefab, new Vector3(x,y,0), Quaternion.identity);
+            Destroy(gameObject);
+        }
+
+
     }
 
 }
