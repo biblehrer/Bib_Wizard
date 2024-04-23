@@ -8,11 +8,12 @@ public class Wizard : MonoBehaviour
     float castTimer = 0f;
     float movementSpeed = 2.0f;
     Vector3 lastMovement = Vector3.zero;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,7 +44,13 @@ public class Wizard : MonoBehaviour
 
         if (movement.x > 0 || movement.y > 0 || movement.x < 0 || movement.y < 0 )
         {
-            lastMovement = movement;
+            lastMovement = movement;            
+            animator.SetBool("Walking", true);
+            transform.localScale = new Vector3(1,1,1);
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
         }
 
 
