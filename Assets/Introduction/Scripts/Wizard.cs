@@ -45,14 +45,7 @@ public class Wizard : MonoBehaviour
         if (movement.x > 0 || movement.y > 0 || movement.x < 0 || movement.y < 0 )
         {
             lastMovement = movement;            
-            animator.SetBool("Walking", true);
-            transform.localScale = new Vector3(1,1,1);
         }
-        else
-        {
-            animator.SetBool("Walking", false);
-        }
-
 
         float sprintSpeedFactor = 1.0f;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -61,6 +54,32 @@ public class Wizard : MonoBehaviour
         }
 
         transform.position += movement.normalized * Time.deltaTime * movementSpeed * sprintSpeedFactor;  
+
+        //
+        // Animation
+        // 
+        if (movement.magnitude > 0)
+        {          
+            animator.SetBool("Walking", true);
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+        }
+
+        // Flip Character
+        if (movement.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (movement.x > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+                    
+
+
 
         //
         // Casting
@@ -72,7 +91,12 @@ public class Wizard : MonoBehaviour
             GameObject obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
             obj.GetComponent<Fireball>().direction = lastMovement;
             castTimer = 1;
-        }     
+            animator.SetBool("Attack", true);
+        }  
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            animator.SetBool("Attack", false);
+        }   
         
     }
 }
