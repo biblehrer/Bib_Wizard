@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Wizard : MonoBehaviour
-{    
+{  
+    public static Wizard player;
+
     public GameObject fireballPrefab;
     float castTimer = 0f;
     float movementSpeed = 2.0f;
     Vector3 lastMovement = Vector3.zero;
     private Animator animator;
 
+
+    public int hp = 100;
+    public int mana = 70;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = this;
         animator = GetComponent<Animator>();
     }
 
@@ -22,6 +29,8 @@ public class Wizard : MonoBehaviour
         //
         // Movement 
         //
+
+        hp--;
 
         Vector3 movement = Vector3.zero;
 
