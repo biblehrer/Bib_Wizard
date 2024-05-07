@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,14 +11,23 @@ public class Hud : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + score;
-        healthText.text = "Health: " + Wizard.player.hp;
-        manaText.text = "Mana: " + Wizard.player.mana;
+        Wizard w = Wizard.player;
+        PlayerStats s = w.stats;
+        float maxMana = s.maxMana;
+        int maxHP = s.maxHP;
+        int displayMana = (int) w.mana;
 
+        scoreText.text = "Score: " + score;
+        healthText.text = "Health: " + w.hp + "/" + maxHP;
+        manaText.text = "Mana: " + displayMana + "/" + maxMana;;
+
+        // Testing
+        //gameObject.SetActive(!gameObject.activeSelf);
     }
 }

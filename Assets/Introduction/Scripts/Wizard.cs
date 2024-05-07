@@ -12,13 +12,16 @@ public class Wizard : MonoBehaviour
     Vector3 lastMovement = Vector3.zero;
     private Animator animator;
 
+    public PlayerStats stats;
 
     public int hp = 100;
-    public int mana = 70;
+    public float mana = 70;
 
     // Start is called before the first frame update
     void Start()
     {
+        stats = new PlayerStats();
+
         player = this;
         animator = GetComponent<Animator>();
     }
@@ -29,8 +32,6 @@ public class Wizard : MonoBehaviour
         //
         // Movement 
         //
-
-        hp--;
 
         Vector3 movement = Vector3.zero;
 
@@ -62,7 +63,7 @@ public class Wizard : MonoBehaviour
             sprintSpeedFactor = 2.0f;
         }
 
-        transform.position += movement.normalized * Time.deltaTime * movementSpeed * sprintSpeedFactor;  
+        transform.position += movement.normalized * Time.deltaTime * stats.movementSpeed * sprintSpeedFactor;  
 
         //
         // Animation
@@ -95,17 +96,31 @@ public class Wizard : MonoBehaviour
         //
 
         castTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && castTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && castTimer <= 0 && mana > 0)
         {
+            mana -= 10;
             GameObject obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
             obj.GetComponent<Fireball>().direction = lastMovement;
-            castTimer = 1;
+            castTimer = stats.castingTime;
             animator.SetBool("Attack", true);
         }  
         if (Input.GetKeyUp(KeyCode.Space))
         {
             animator.SetBool("Attack", false);
         }   
+
+
+        // Mana Handling
+        mana = mana + Time.deltaTime*stats.manaRegeneration;
         
     }
+
+
+
+    public static PlayerStats GetStats()
+    {
+        return player.stats;
+    }
+
+
 }
