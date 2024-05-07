@@ -5,7 +5,18 @@ using UnityEngine.UIElements;
 
 public class Fireball : MonoBehaviour
 {
-    public Vector3 direction; 
+    public Vector3 direction;
+
+    private float variable;
+
+    private int fun()
+    {
+        PlayerStats p = new PlayerStats();
+        p.manaRegeneration = 0;
+        return 0;
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,4 +50,5 @@ public class Fireball : MonoBehaviour
         }    
         Destroy(gameObject);
     }
+    
 }

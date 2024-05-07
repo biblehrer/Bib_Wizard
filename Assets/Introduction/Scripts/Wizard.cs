@@ -14,13 +14,15 @@ public class Wizard : MonoBehaviour
 
     public PlayerStats stats;
 
-    public int hp = 100;
-    public float mana = 70;
+    public int hp;
+    public float mana;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         stats = new PlayerStats();
+        hp = stats.maxHP;
+        mana = stats.maxMana;
 
         player = this;
         animator = GetComponent<Animator>();
@@ -112,6 +114,10 @@ public class Wizard : MonoBehaviour
 
         // Mana Handling
         mana = mana + Time.deltaTime*stats.manaRegeneration;
+        if (mana > stats.maxMana)
+        {
+            mana = stats.maxMana;
+        }
         
     }
 
