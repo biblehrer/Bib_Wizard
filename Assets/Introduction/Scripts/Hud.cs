@@ -1,12 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
     public TMP_Text scoreText;
     public TMP_Text healthText;
     public TMP_Text manaText;
+    public TMP_Text levelText;
     public static int score = 0;
+
+
+    public Image healthImage;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +30,13 @@ public class Hud : MonoBehaviour
 
         scoreText.text = "Score: " + score;
         healthText.text = "Health: " + w.hp + "/" + maxHP;
-        manaText.text = "Mana: " + displayMana + "/" + maxMana;;
+        manaText.text = "Mana: " + displayMana + "/" + maxMana;
+        levelText.text = "Level: " + s.level;
 
         // Testing
         //gameObject.SetActive(!gameObject.activeSelf);
+
+        float healthPercentage = (float)  w.hp / (float) maxHP;
+        healthImage.transform.localScale = new Vector3(healthPercentage, 1,1 );
     }
 }
