@@ -7,7 +7,6 @@ public class PlayerStats
     public int maxHP = 100;
     public float maxMana = 50;
     public float manaRegeneration = 5;
-
     public int level = 1;
 
     public int xp = 0;

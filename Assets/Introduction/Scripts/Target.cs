@@ -26,7 +26,6 @@ public class Target : MonoBehaviour
             Instantiate(targetPrefab, new Vector3(x,y,0), Quaternion.identity);
             Destroy(gameObject);
             Hud.score ++;
-
             
             Wizard player = Wizard.player;
             PlayerStats stats = player.stats;

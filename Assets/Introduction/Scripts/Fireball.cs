@@ -44,7 +44,7 @@ public class Fireball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision2D)
     {
         string tag = collision2D.gameObject.tag;
-        if (tag == "Player")
+        if (tag == "Player" || tag == "Fireball")
         {
             return;
         }    

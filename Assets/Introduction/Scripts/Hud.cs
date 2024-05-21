@@ -12,6 +12,8 @@ public class Hud : MonoBehaviour
 
 
     public Image healthImage;
+    public Image manaImage;
+    public Image xpImage;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +24,29 @@ public class Hud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Wizard w = Wizard.player;
-        PlayerStats s = w.stats;
-        float maxMana = s.maxMana;
-        int maxHP = s.maxHP;
-        int displayMana = (int) w.mana;
+        // Create some Variables that we can use for displaying
+        Wizard wizard = Wizard.player;
+        PlayerStats stats = wizard.stats;
+        float maxMana = stats.maxMana;
+        int maxHP = stats.maxHP;
+        int displayMana = (int) wizard.mana;
+        int displayHealth = (int) wizard.hp;
 
-        scoreText.text = "Score: " + score;
-        healthText.text = "Health: " + w.hp + "/" + maxHP;
-        manaText.text = "Mana: " + displayMana + "/" + maxMana;
-        levelText.text = "Level: " + s.level;
+        // Adjust the Player Stats Texts 
+        scoreText.text  = "Score " + score;
+        healthText.text = "Health: " + displayHealth + "/" + maxHP;
+        manaText.text   = "Mana:   " + displayMana + "/" + maxMana;
+        levelText.text  = "Level:  " + stats.level;
 
-        // Testing
-        //gameObject.SetActive(!gameObject.activeSelf);
-
-        float healthPercentage = (float)  w.hp / (float) maxHP;
+        // Adjust Healthbars
+        float healthPercentage = (float)  wizard.hp / (float) maxHP;
         healthImage.transform.localScale = new Vector3(healthPercentage, 1,1 );
+
+        float manaPercentage = (float)  wizard.mana / (float) maxMana;
+        manaImage.transform.localScale = new Vector3(manaPercentage, 1,1 );
+
+        float xpPercentage = (float)  stats.xp / (float) (stats.level*3f);
+        xpImage.transform.localScale = new Vector3(xpPercentage, 1,1 );
+
     }
 }

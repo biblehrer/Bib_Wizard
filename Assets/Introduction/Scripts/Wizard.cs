@@ -14,12 +14,12 @@ public class Wizard : MonoBehaviour
 
     public PlayerStats stats;
 
-    public int hp;
+    public float hp;
     public float mana;
 
     // Start is called before the first frame update
     void Start()
-    {        
+    { 
         stats = new PlayerStats();
         hp = stats.maxHP;
         mana = stats.maxMana;
@@ -98,7 +98,7 @@ public class Wizard : MonoBehaviour
         //
 
         castTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && castTimer <= 0 && mana > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && castTimer <= 0 && mana > 10)
         {
             mana -= 10;
             GameObject obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
