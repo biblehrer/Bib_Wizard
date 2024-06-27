@@ -8,11 +8,10 @@ public class Wizard : MonoBehaviour
 
     public GameObject fireballPrefab;
     float castTimer = 0f;
-    float movementSpeed = 2.0f;
     Vector3 lastMovement = Vector3.zero;
     private Animator animator;
 
-    public PlayerStats stats;
+    public static PlayerStats stats;
 
     public float hp;
     public float mana;
@@ -20,7 +19,10 @@ public class Wizard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        stats = new PlayerStats();
+        if (stats == null)
+        {
+            stats = new PlayerStats();
+        }        
         hp = stats.maxHP;
         mana = stats.maxMana;
 
@@ -31,6 +33,11 @@ public class Wizard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.state == "Break")
+        {
+            return;
+        }
+        
         //
         // Movement 
         //
@@ -125,7 +132,7 @@ public class Wizard : MonoBehaviour
 
     public static PlayerStats GetStats()
     {
-        return player.stats;
+        return stats;
     }
 
 

@@ -25,10 +25,10 @@ public class Target : MonoBehaviour
             float y = Random.value * 10 -5 ;
             Instantiate(targetPrefab, new Vector3(x,y,0), Quaternion.identity);
             Destroy(gameObject);
-            Hud.score ++;
+            GameManager.Instance.score++;
             
             Wizard player = Wizard.player;
-            PlayerStats stats = player.stats;
+            PlayerStats stats = Wizard.stats;
             stats.GainXp(1);
         }
 

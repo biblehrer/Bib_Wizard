@@ -38,6 +38,10 @@ public class Fireball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.state == "Break")
+        {
+            return;
+        }
         transform.position = transform.position + direction *4 * Time.deltaTime;        
     }
 
@@ -49,6 +53,7 @@ public class Fireball : MonoBehaviour
             return;
         }    
         Destroy(gameObject);
+        
     }
     
 }

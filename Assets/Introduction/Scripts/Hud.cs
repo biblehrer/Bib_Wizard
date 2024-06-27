@@ -8,7 +8,7 @@ public class Hud : MonoBehaviour
     public TMP_Text healthText;
     public TMP_Text manaText;
     public TMP_Text levelText;
-    public static int score = 0;
+
 
 
     public Image healthImage;
@@ -26,13 +26,14 @@ public class Hud : MonoBehaviour
     {
         // Create some Variables that we can use for displaying
         Wizard wizard = Wizard.player;
-        PlayerStats stats = wizard.stats;
+        PlayerStats stats = Wizard.stats;
         float maxMana = stats.maxMana;
         int maxHP = stats.maxHP;
         int displayMana = (int) wizard.mana;
         int displayHealth = (int) wizard.hp;
 
         // Adjust the Player Stats Texts 
+        int score = GameManager.Instance.score;
         scoreText.text  = "Score " + score;
         healthText.text = "Health: " + displayHealth + "/" + maxHP;
         manaText.text   = "Mana:   " + displayMana + "/" + maxMana;
