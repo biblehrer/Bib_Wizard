@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         {
             case "Game":
                 Counter += Time.deltaTime;
-                if (Counter >= 20)
+                if (Counter >= 100)
                 {
                     ReturnToTitle();
                     Counter = 0;
